@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod1
+  labels: 
+    type: tondu
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+    - image: hashicorp/http-echo
+      name: netflixcontainer
+      ports:
+      - containerPort: 5678
+#     - image: linuxserver/firefox
+#       name: firefoxcontainer
+#       ports:
+#       - containerPort: 3000
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: firefox-pod
+spec:
+  containers:
+    - name: linuxserverfirefox1
+      image: linuxserver/firefox
+      ports:
+        - containerPort: 3000

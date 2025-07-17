@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: azurefile-pod
+spec:
+  containers:
+  - name: app
+    image: halverneus/static-file-server
+    ports:
+    - containerPort: 8000
+    volumeMounts:
+    - mountPath: /web
+      name: azure-storage
+  volumes:
+  - name: azure-storage
+    persistentVolumeClaim:
+      claimName: my-pvc

@@ -1,0 +1,18 @@
+# pod-azurefile.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-azurefile
+spec:
+  containers:
+    - name: app
+      image: halverneus/static-file-server
+      ports:
+        - containerPort: 8080
+      volumeMounts:
+        - name: azurefile
+          mountPath: /web
+  volumes:
+    - name: azurefile
+      persistentVolumeClaim:
+        claimName: azurefile-dynamic-pvc

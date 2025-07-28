@@ -22,7 +22,7 @@ provider "azurerm" {
 # variable "x" {}
 
 # variable "y" {}
-
+# This is the parent module
 module "siddharth_rg" {
   source = "../child_1"
   #  x = "sid2-rg"

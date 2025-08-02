@@ -15,3 +15,5 @@ steps:
         cd Terraform/varriables/parent
         pwd
         terraform init
+        terraform plan
+        terraform apply --auto-approve

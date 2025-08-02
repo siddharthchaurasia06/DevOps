@@ -14,9 +14,4 @@ steps:
       script: |
         cd Terraform/varriables/parent
         pwd
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        pwd
         terraform init

@@ -11,5 +11,5 @@ pool: sid-agent-pool
   inputs:
     targetType: 'inline'
     script: |
-      cd Terraform/varriables/parent/main.tf
+      cd Terraform/varriables/parent
       pwd

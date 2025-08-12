@@ -4,24 +4,32 @@ pool:
   name: sid-agent-pool
 
 steps:
-
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/Terraform.zip'  
-    destinationFolder: '$(System.DefaultWorkingDirectory)/Terraform'
-    cleanDestinationFolder: true
+# Install Terraform
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
 
-- script: terraform -version
-  displayName: 'Check Terraform version'
-- task: TerraformTask@5
+# Terraform Init
+- task: TerraformTaskV5@5
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/varriables/parent'
-    backendServiceArm: 'my-connection'
-    backendAzureRmStorageAccountName: 'siddharthsa11'
-    backendAzureRmContainerName: 'sid'
-    backendAzureRmKey: 'my.tfstate'
+    backendServiceArm: 'ashcan'
+    backendAzureRmStorageAccountName: 'strglnp1'
+    backendAzureRmContainerName: 'container'
+    backendAzureRmKey: 'sid.tfstate'
+
+# Terraform Plan
+# - task: TerraformTaskV5@5
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'plan'
+#     environmentServiceNameAzureRM: 'ashcan'
+
+# Terraform Apply (only on main branch if previous tasks succeed)
+# - task: TerraformTaskV5@5
+#   condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'apply'
+#     environmentServiceNameAzureRM: 'ashcan'

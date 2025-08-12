@@ -2,22 +2,8 @@ trigger: none
 
 pool: 
   name: sid-agent-pool
-variables:
-  terraformWorkingDir: '$(System.DefaultWorkingDirectory)/Terraform/varriables/parent'
 
 steps:
-# - task: TerraformInstaller@1
-#   inputs:
-#     terraformVersion: 'latest'
-
-- task: TerraformTask@5
+- task: TerraformInstaller@1
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/varriables/parent/'
-    backendServiceArm: 'my-connection'
-    backendAzureRmOverrideSubscriptionID: '712bfb2b-0ea5-4e2e-ae12-b849c506ebe4'
-    backendAzureRmResourceGroupName: 'sid1-rg'
-    backendAzureRmStorageAccountName: 'siddharthsa11'
-    backendAzureRmContainerName: 'sid'
-    backendAzureRmKey: 'sid.tfstate'
+    terraformVersion: 'latest'

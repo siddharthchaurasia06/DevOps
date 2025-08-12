@@ -13,7 +13,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     terraformVersion: '1.10.5'
-    workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/varriables/parent/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/rg-creating'
     backendServiceArm: 'my-connection'
     backendAzureRmStorageAccountName: 'siddharthsa11'
     backendAzureRmContainerName: 'sid'

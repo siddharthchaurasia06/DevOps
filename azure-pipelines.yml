@@ -12,6 +12,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
+    terraformVersion: '1.10.5'
     workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/varriables/parent/'
     backendServiceArm: 'my-connection'
     backendAzureRmStorageAccountName: 'siddharthsa11'

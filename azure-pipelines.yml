@@ -1,19 +1,34 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger: none
 
 pool: 
   name: sid-agent-pool
+variables:
+  terraformVersion: '1.9.5' # Terraform ka version
+  terraformWorkingDir: '$(System.DefaultWorkingDirectory)/Terraform/varriables/parent'
+
 steps:
-  - task: PowerShell@2
+  - task: TerraformInstaller@0
+    displayName: 'Install Terraform'
     inputs:
-      targetType: 'inline'
-      script: |
-        cd Terraform/varriables/parent
-        pwd
-        terraform init
-        terraform plan
-        terraform apply --auto-approve
+      terraformVersion: $(terraformVersion)
+
+  - task: TerraformCLI@0
+    displayName: 'Terraform Init'
+    inputs:
+      command: 'init'
+      workingDirectory: $(terraformWorkingDir)
+      backendType: 'azurerm'
+      backendServiceArm: 'MyAzureServiceConnection'
+      ensureBackend: true
+      backendAzureRmResourceGroupName: 'sid1-rg'
+      backendAzureRmStorageAccountName: 'siddharthsa11'
+      backendAzureRmContainerName: 'sid'
+      backendAzureRmKey: 'sid.tfstate'
+
+  - task: TerraformCLI@0
+    displayName: 'Terraform Plan'
+    inputs:
+      command: 'plan'
+      workingDirectory: $(terraformWorkingDir)
+      environmentServiceNameAzureRM: 'MyAzureServiceConnection'
+

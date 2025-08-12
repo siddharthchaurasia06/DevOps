@@ -7,12 +7,6 @@ variables:
   tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
 
 steps:
-# Install unzip (Ubuntu self-hosted agent के लिए)
-# - script: |
-#     sudo apt-get update
-#     sudo apt-get install -y unzip
-#   displayName: 'Install unzip on VM'
-
 # Install Terraform
 - task: TerraformInstaller@1
   inputs:
@@ -29,10 +23,19 @@ steps:
     backendAzureRmContainerName: 'sid'
     backendAzureRmKey: 'terra.tfstate'
 
-# Terraform plan
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(tfDir)'
     environmentServiceNameAzureRM: 'my-connection'
+
+# Terraform apply (only if branch is main)
+- task: TerraformTask@5
+  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(tfDir)'
+    environmentServiceNameAzureRM: 'my-connection'
+    args: '-auto-approve'

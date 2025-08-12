@@ -5,6 +5,11 @@ pool:
 
 steps:
 
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/Terraform.zip'  
+    destinationFolder: '$(System.DefaultWorkingDirectory)/Terraform'
+    cleanDestinationFolder: true
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'

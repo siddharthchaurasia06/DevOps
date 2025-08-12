@@ -3,32 +3,21 @@ trigger: none
 pool: 
   name: sid-agent-pool
 variables:
-  terraformVersion: '1.9.5' # Terraform ka version
   terraformWorkingDir: '$(System.DefaultWorkingDirectory)/Terraform/varriables/parent'
 
 steps:
-  - task: TerraformInstaller@0
-    displayName: 'Install Terraform'
-    inputs:
-      terraformVersion: $(terraformVersion)
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
 
-  - task: TerraformCLI@0
-    displayName: 'Terraform Init'
-    inputs:
-      command: 'init'
-      workingDirectory: $(terraformWorkingDir)
-      backendType: 'azurerm'
-      backendServiceArm: 'MyAzureServiceConnection'
-      ensureBackend: true
-      backendAzureRmResourceGroupName: 'sid1-rg'
-      backendAzureRmStorageAccountName: 'siddharthsa11'
-      backendAzureRmContainerName: 'sid'
-      backendAzureRmKey: 'sid.tfstate'
-
-  - task: TerraformCLI@0
-    displayName: 'Terraform Plan'
-    inputs:
-      command: 'plan'
-      workingDirectory: $(terraformWorkingDir)
-      environmentServiceNameAzureRM: 'MyAzureServiceConnection'
-
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)Terraform/varriables/parent/'
+    backendServiceArm: 'my-connection'
+    backendAzureRmOverrideSubscriptionID: '712bfb2b-0ea5-4e2e-ae12-b849c506ebe4'
+    backendAzureRmResourceGroupName: 'sid1-rg'
+    backendAzureRmStorageAccountName: 'siddharthsa11'
+    backendAzureRmContainerName: 'sid'
+    backendAzureRmKey: 'sid.tfstate'

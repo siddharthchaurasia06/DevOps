@@ -10,26 +10,3 @@ steps:
     terraformVersion: 'latest'
 
 # Terraform Init
-- task: TerraformTaskV5@5
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'ashcan'
-    backendAzureRmStorageAccountName: 'strglnp1'
-    backendAzureRmContainerName: 'container'
-    backendAzureRmKey: 'sid.tfstate'
-
-# Terraform Plan
-# - task: TerraformTaskV5@5
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'plan'
-#     environmentServiceNameAzureRM: 'ashcan'
-
-# Terraform Apply (only on main branch if previous tasks succeed)
-# - task: TerraformTaskV5@5
-#   condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'apply'
-#     environmentServiceNameAzureRM: 'ashcan'

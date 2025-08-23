@@ -6,6 +6,17 @@ pool:
 variables:
   tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
 
+parameters:
+  - name: runTfsec
+    displayName: "Run tfsec Security Scan?"
+    type: boolean
+    default: true
+
+  - name: runTerraformPlan
+    displayName: "Run Terraform Plan?"
+    type: boolean
+    default: true
+
 jobs:
 # -------------------------
 # Job 1: Terraform Init + Plan
@@ -38,7 +49,18 @@ jobs:
         environmentServiceNameAzureRM: 'my-connection'
 
 # -------------------------
-# Job 2: Manual Approval
+# Job 2: tfsec
+# -------------------------
+- job: tfsec
+  displayName: security check
+  condition: eq(${{ parameters.runTfsec }}, true)
+  steps:
+  - task: tfsec@1
+    inputs:
+      version: 'v1.26.0'
+      dir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
+# -------------------------
+# Job 3: Manual Approval
 # -------------------------
 - job: ManualApproval
   displayName: "Manual Approval for Apply"
@@ -53,7 +75,7 @@ jobs:
         timeout: '1d'
 
 # -------------------------
-# Job 3: Terraform Apply
+# Job 4: Terraform Apply
 # -------------------------
 - job: TerraformApply
   displayName: "Terraform Apply"

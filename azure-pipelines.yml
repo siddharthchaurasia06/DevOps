@@ -10,12 +10,12 @@ parameters:
   - name: runTfsec
     displayName: "Run tfsec Security Scan?"
     type: boolean
-    default: true
+    default: false
 
   - name: runTerraformPlan
     displayName: "Run Terraform Plan?"
     type: boolean
-    default: true
+    default: false
 
 jobs:
 # -------------------------
@@ -23,6 +23,7 @@ jobs:
 # -------------------------
 - job: TerraformPlan
   displayName: "Terraform Init and Plan"
+  condition: eq(${{ parameters.runTerraformPlan }}, true)
   steps:
     # Install Terraform
     - task: TerraformInstaller@1

@@ -65,9 +65,9 @@ stages:
             workingDirectory: '$(tfDir)'
             environmentServiceNameAzureRM: 'my-connection'
 
-  - stage: manualValidationAndSecurityCheck
-    displayName: tfsec and manual validation
-    dependsOn: initplan
+  - stage: SecurityCheck
+    displayName: Security Check
+    # dependsOn: initplan
     jobs:
     - job: tfsec
       displayName: security check
@@ -76,10 +76,11 @@ stages:
       - task: tfsec@1
         inputs:
           version: 'v1.26.0'
-          dir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
+          dir: '$(tfDir)'
 
   - stage: terraformapply
     displayName: Aplly
+    dependsOn: initplan
     jobs:
     - job: ManualApproval
       displayName: "Manual Approval for Apply"

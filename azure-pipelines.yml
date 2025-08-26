@@ -47,6 +47,16 @@ stages:
         - task: TerraformInstaller@1
           inputs:
             terraformVersion: 'latest'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(tfDir)'
+            backendServiceArm: 'my-connection'
+            backendAzureRmStorageAccountName: 'siddharthsa11'
+            backendAzureRmContainerName: 'sid'
+            backendAzureRmKey: 'terra.tfstate'
+            
         # Terraform plan
         - task: TerraformTask@5
           inputs:

@@ -78,6 +78,9 @@ stages:
           version: 'v1.26.0'
           dir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
 
+  - stage: terraformapply
+    displayName: Aplly
+    jobs:
     - job: ManualApproval
       displayName: "Manual Approval for Apply"
       # dependsOn: TerraformPlan
@@ -90,20 +93,23 @@ stages:
             onTimeout: 'reject'
             timeout: '1d'
 
-
-  - stage: terraformapply
-    displayName: Aplly
-    dependsOn: manualValidationAndSecurityCheck
-    jobs:
     - job: TerraformApply
       displayName: "Terraform Apply"
-      # dependsOn: ManualApproval
+      dependsOn: ManualApproval
       condition: succeeded()
       steps:
         - task: TerraformInstaller@1
           inputs:
             terraformVersion: 'latest'
-
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(tfDir)'
+            backendServiceArm: 'my-connection'
+            backendAzureRmStorageAccountName: 'siddharthsa11'
+            backendAzureRmContainerName: 'sid'
+            backendAzureRmKey: 'terra.tfstate'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'

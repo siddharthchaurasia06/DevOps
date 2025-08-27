@@ -4,9 +4,16 @@ pool:
   name: sid-agent-pool
 
 variables:
-  tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
+  tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating/environment/${{ parameters.environment }}'
 
 parameters:
+  - name: environment
+    displayName: environment
+    type: string
+    values:
+      - dev
+      - prod
+
   - name: runTfsec
     displayName: "Run tfsec Security Scan?"
     type: boolean

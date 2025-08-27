@@ -15,7 +15,9 @@ provider "azurerm" {
 
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "rg336"
+module "rg1" {
+  source   = "../../module"
+  rg_name  = "rg-dev-336"
   location = "East US"
+  
 }

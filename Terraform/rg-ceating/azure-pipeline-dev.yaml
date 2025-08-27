@@ -4,7 +4,7 @@ pool:
   name: sid-agent-pool
 
 variables:
-  tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating'
+  tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating/environment/dev'
 
 parameters:
   - name: runTfsec

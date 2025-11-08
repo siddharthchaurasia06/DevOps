@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: todo-ui
-        image: devopsinsidersacr235.azurecr.io/todo-ui:v4
+        image: acrtodoappsiddharth1.azurecr.io/add-task:v1
         ports:
         - containerPort: 80

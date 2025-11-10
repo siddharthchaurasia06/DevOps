@@ -4,6 +4,7 @@ metadata:
   name: firefox
   labels:
     app.kubernetes.io/name: firefox
+  namespace: argocd
 spec:
   containers:
   - name: firefox

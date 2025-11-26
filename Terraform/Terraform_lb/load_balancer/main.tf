@@ -35,23 +35,23 @@
 # }
 
 
-# # module "public_ip1" {
-# #   depends_on = [ module.resource_group ]
-# #   source              = "../modules/azurerm_public_ip"
-# #   public_ip_name      = "pip-lb"
-# #   resource_group_name = "rg-sid2"
-# #   location            = "northeurope"
-# #   allocation_method   = "Static"
-# # }
+# module "public_ip1" {
+#   depends_on = [ module.resource_group ]
+#   source              = "../modules/azurerm_public_ip"
+#   public_ip_name      = "pip-lb"
+#   resource_group_name = "rg-sid2"
+#   location            = "northeurope"
+#   allocation_method   = "Static"
+# }
 
-# # module "public_ip2" {
-# #   depends_on = [ module.resource_group ]
-# #   source              = "../modules/azurerm_public_ip"
-# #   public_ip_name      = "pip-bation"
-# #   resource_group_name = "rg-sid2"
-# #   location            = "northeurope"
-# #   allocation_method   = "Static"
-# # }
+# module "public_ip2" {
+#   depends_on = [ module.resource_group ]
+#   source              = "../modules/azurerm_public_ip"
+#   public_ip_name      = "pip-bation"
+#   resource_group_name = "rg-sid2"
+#   location            = "northeurope"
+#   allocation_method   = "Static"
+# }
 
 # module "public_ip3" {
 #   depends_on = [ module.resource_group ]

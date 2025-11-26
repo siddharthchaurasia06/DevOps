@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: azure-application-gateway
   rules:
-  - host: add-task-api.6weathers.com
+  - host: get-task-api.6weathers.com
     http:
       paths:
       - pathType: Prefix

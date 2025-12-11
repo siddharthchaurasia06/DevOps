@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: sid-agent-pool
+  name: Azure Pipelines
 
 variables:
   tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating/environment/dev'
@@ -36,7 +36,7 @@ stages:
             command: 'init'
             workingDirectory: '$(tfDir)'
             backendServiceArm: 'my-connection'
-            backendAzureRmStorageAccountName: 'siddharthsa11'
+            backendAzureRmStorageAccountName: 'sasid'
             backendAzureRmContainerName: 'sid'
             backendAzureRmKey: 'terra.tfstate'
     - job: Terraformplan
@@ -53,7 +53,7 @@ stages:
             command: 'init'
             workingDirectory: '$(tfDir)'
             backendServiceArm: 'my-connection'
-            backendAzureRmStorageAccountName: 'siddharthsa11'
+            backendAzureRmStorageAccountName: 'sasid'
             backendAzureRmContainerName: 'sid'
             backendAzureRmKey: 'terra.tfstate'
             
@@ -108,7 +108,7 @@ stages:
             command: 'init'
             workingDirectory: '$(tfDir)'
             backendServiceArm: 'my-connection'
-            backendAzureRmStorageAccountName: 'siddharthsa11'
+            backendAzureRmStorageAccountName: 'sasid'
             backendAzureRmContainerName: 'sid'
             backendAzureRmKey: 'terra.tfstate'
         - task: TerraformTask@5

@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: Azure Pipelines
+  name: default
 
 variables:
   tfDir: '$(System.DefaultWorkingDirectory)/Terraform/rg-ceating/environment/dev'

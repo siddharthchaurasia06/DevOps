@@ -1,0 +1,27 @@
+# module "resource_group" {
+#    source = "../../modules/azurerm_resource_group"
+
+#     resource_group_name     = "rg-devops-001"
+#     resource_group_location = "japaneast"
+
+# }
+
+# module "public_ip" {
+#   depends_on = [ module.resource_group , module.vnet ]
+#   source = "../../modules/azurerm_public_IP"
+#   vms    = var.vms
+# }
+
+
+# module "vnet" {
+#   depends_on = [module.resource_group]
+#   source     = "../../modules/azurerm_virtual_network"
+#   vnets      = var.vnets
+# }
+
+# module "vms" {
+#   depends_on = [module.vnet, module.resource_group, module.public_ip]
+#   source     = "../../modules/azurerm_vertual_machines"
+#   vms        = var.vms
+  
+# }

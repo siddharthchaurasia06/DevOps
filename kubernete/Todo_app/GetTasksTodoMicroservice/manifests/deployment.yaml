@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-get-task-api
-        image: acrtodoappsiddharth1.azurecr.io/gettasks:3
+        image: acrtodoappsiddharth1.azurecr.io/gettask:3
         ports:
         - containerPort: 8000
         env: 

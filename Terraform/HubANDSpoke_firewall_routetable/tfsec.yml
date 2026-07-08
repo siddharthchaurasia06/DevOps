@@ -1,0 +1,24 @@
+steps:
+- task: PowerShell@2
+  displayName: 'Install tfsec (Linux)'
+  inputs:
+    targetType: 'inline'
+    pwsh: true
+    script: |
+      $version = "latest"
+
+      Invoke-WebRequest `
+        -Uri "https://github.com/aquasecurity/tfsec/releases/latest/download/tfsec-linux-amd64" `
+        -OutFile "$(Agent.TempDirectory)/tfsec"
+
+      chmod +x "$(Agent.TempDirectory)/tfsec"
+
+      & "$(Agent.TempDirectory)/tfsec" --version
+
+- task: PowerShell@2
+  displayName: 'Run tfsec'
+  inputs:
+    targetType: 'inline'
+    pwsh: true
+    script: |
+      & "$(Agent.TempDirectory)/tfsec" "$(System.DefaultWorkingDirectory)/module/dev"

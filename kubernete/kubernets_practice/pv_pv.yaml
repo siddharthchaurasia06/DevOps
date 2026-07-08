@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+
+  persistentVolumeReclaimPolicy: Retain
+
+  csi:
+    driver: disk.csi.azure.com
+    readOnly: false
+    volumeHandle: /subscriptions/2cec8319-0121-4912-85d6-b2e4e5d68fbf/resourcegroups/MC_rg1234_aks-dev-todoapp_canadacentral/providers/Microsoft.Compute/disks/pvdisk1

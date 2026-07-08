@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod44
+  namespace: default
+  labels:
+    app: pod44
+
+spec:
+  containers:
+    - name: container1
+      image: linuxserver/firefox
+      ports:
+        - containerPort: 3000
+        
+      volumeMounts:
+        - mountPath: /web
+          name: azure-storage
+
+  volumes:
+    - name: azure-storage
+      persistentVolumeClaim:
+        claimName: azurefile-pvc
